@@ -4,8 +4,6 @@ var path = require("path");
 module.exports = {
   entry: path.join(__dirname, "src", "index.js"),
   output: {
-    libraryTarget: "commonjs",
-    library: Package.name,
     filename: "index.js",
     path: path.join(__dirname, "dist")
   },

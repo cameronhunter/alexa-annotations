@@ -1,4 +1,5 @@
-import Alexa from "./alexa"
-import Echo from "./echo"
+import Handler from "./handler";
 
-export default new Alexa.Handler(new Echo());
+export default {
+  Handler: Handler
+};
