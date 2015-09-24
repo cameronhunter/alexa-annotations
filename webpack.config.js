@@ -16,7 +16,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
         query: {
-          optional: ['runtime'],
+          optional: ["runtime"],
           stage: 0
         }
       }
