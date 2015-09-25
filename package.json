@@ -2,11 +2,10 @@
   "author": "Cameron Hunter <hello@cameronhunter.co.uk> (http://cameronhunter.co.uk)",
   "name": "alexa-lambda-skill",
   "description": "Create Alexa Skills for AWS Lambda, easily.",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "main": "dist/index.js",
   "license": "MIT",
   "repository": "cameronhunter/alexa-lambda-skill",
-  "preferGlobal": true,
   "files": [
     "dist"
   ],
