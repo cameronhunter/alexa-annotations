@@ -1,7 +1,4 @@
-import Handler from "./lib/handler";
-import Response from "./lib/response";
-
-export default {
-  Handler: Handler,
-  ...Response
+module.exports = {
+  Handler: require("./lib/handler"),
+  Response: require("./lib/response")
 };

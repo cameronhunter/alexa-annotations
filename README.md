@@ -5,7 +5,7 @@ Easily create Alexa Skills to run on AWS Lambda using ES6.
 ## Example
 
 ```javascript
-import { Handler, say } from "alexa-lambda-skill";
+import { Handler, Response } from "alexa-lambda-skill";
 
 class MySkill {
   // Called when a LaunchRequest is triggered
@@ -16,7 +16,7 @@ class MySkill {
   // Called when the IntentRequest "speak" is triggered
   speak(slots) {
     const { sentence } = slots;
-    return say(sentence).card("MySkill", `Said "${sentence}"`);
+    return Response.say(sentence).card("MySkill", `Said "${sentence}"`);
   }
 
   // Called when the IntentRequest doesn't have a specific handler
