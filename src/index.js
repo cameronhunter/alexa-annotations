@@ -1,2 +1,2 @@
-export Handler from "./handler";
+export Skill from "./skill";
 export Response from "./response";
