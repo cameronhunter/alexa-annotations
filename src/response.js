@@ -1,4 +1,9 @@
 export default class Response {
+  static say = new Response().say;
+  static card = new Response().card;
+  static reprompt = new Response().reprompt;
+  static shouldEndSession = new Response().shouldEndSession;
+
   constructor(state) {
     this.state = { shouldEndSession: true, ...state };
   }
@@ -19,8 +24,3 @@ export default class Response {
     return new Response(this.state, { shouldEndSession });
   }
 }
-
-export const say = new Response().say;
-export const card = new Response().card;
-export const reprompt = new Response().reprompt;
-export const shouldEndSession = new Response().shouldEndSession;
