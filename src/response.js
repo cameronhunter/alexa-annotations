@@ -1,10 +1,11 @@
 export default class Response {
-  static say = new Response().say;
-  static card = new Response().card;
-  static reprompt = new Response().reprompt;
-  static shouldEndSession = new Response().shouldEndSession;
+  static say = (...args) => new Response().say(...args);
+  static card = (...args) => new Response().card(...args);
+  static reprompt = (...args) => new Response().reprompt(...args);
+  static shouldEndSession = (...args) => new Response().shouldEndSession(...args);
 
-  constructor(state) {
+  constructor(...args) {
+    const state = args.reduce((result, item) => ({ ...result, ...item }), {});
     this.state = { shouldEndSession: true, ...state };
   }
 

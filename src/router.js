@@ -1,12 +1,14 @@
 export default (request = {}, skill) => {
   const { type, reason, intent = {} } = request;
   const { name } = intent;
-  return [
-    (type == "IntentRequest" && skill[name]),
+  const [route] = [
+    (type == "LaunchRequest" && skill["launch"] && skill["launch"].bind(skill)),
     (type == "IntentRequest" && skill["intent"] && skill["intent"].bind(skill, name)),
-    (type == "LaunchRequest" && skill["launch"]),
-    (type == "SessionEndedRequest" && skill["sessionEnded"] && skill["sessionEnded"].bind(skill, reason))
-  ].filter(handler => {
-    return !!handler;
-  })[0];
+    (type == "SessionEndedRequest" && skill["sessionEnded"] && skill["sessionEnded"].bind(skill, reason)),
+    (type == "IntentRequest" && skill[name] && skill[name].bind(skill))
+  ].filter(handler => (
+    !!handler
+  ));
+
+  return route;
 };
