@@ -1,13 +1,5 @@
 import test from 'ava';
-import { Skill, Response } from '..';
-
-class MySkill {
-  launch() {
-    return Response.say("Skill launched!");
-  }
-}
-
-const skill = Skill()(MySkill);
+import MySkill from '../build/test/my-skill';
 
 test('Launch request', t => {
   const event = {
@@ -16,12 +8,12 @@ test('Launch request', t => {
     }
   };
 
-  return skill(event).then(response => {
+  return MySkill(event).then(response => {
     t.same(response, {
-      version: "1.0",
+      version: '1.0',
       response: {
         shouldEndSession: true,
-        outputSpeech: { type: "PlainText", text: "Skill launched!" }
+        outputSpeech: { type: 'PlainText', text: 'Skill launched!' }
       }
     });
   });
@@ -30,17 +22,55 @@ test('Launch request', t => {
 test('Unhandled request', t => {
   const event = {
     request: {
-      type: "IntentRequest",
-      intent: { name: "Unhandled" }
+      type: 'IntentRequest',
+      intent: { name: 'Unhandled' }
     }
   };
 
-  return skill(event).then(response => {
+  return MySkill(event).then(response => {
     t.same(response, {
-      version: "1.0",
+      version: '1.0',
       response: {
         shouldEndSession: true,
-        outputSpeech: { type: "PlainText", text: "I'm sorry, I don't know how to do that." }
+        outputSpeech: { type: 'PlainText', text: 'I\'m sorry, I don\'t know how to do that.' }
+      }
+    });
+  });
+});
+
+test('Builtin Help intent', t => {
+  const event = {
+    request: {
+      type: 'IntentRequest',
+      intent: { name: 'AMAZON.HelpIntent' }
+    }
+  };
+
+  return MySkill(event).then(response => {
+    t.same(response, {
+      version: '1.0',
+      response: {
+        shouldEndSession: true,
+        outputSpeech: { type: 'PlainText', text: 'Help' }
+      }
+    });
+  });
+});
+
+test('Help intent', t => {
+  const event = {
+    request: {
+      type: 'IntentRequest',
+      intent: { name: 'help' }
+    }
+  };
+
+  return MySkill(event).then(response => {
+    t.same(response, {
+      version: '1.0',
+      response: {
+        shouldEndSession: true,
+        outputSpeech: { type: 'PlainText', text: 'Help' }
       }
     });
   });

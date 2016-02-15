@@ -1,26 +1,22 @@
-import Router from "./router";
-import Response from "./response";
+import Response from './response';
 
 const noop = () => {};
-const NotFound = () => Response.say("I'm sorry, I don't know how to do that.");
+const NotFound = Response.say('I\'m sorry, I don\'t know how to do that.');
 
-export default (router = Router) => (Skill) => (event, context) => {
-  const { succeed = noop, fail = noop, done = noop } = context || {};
+export default Skill => (event, context) => {
+  const { succeed = noop, fail = noop } = context || {};
 
-  const { request, session = {}, intent = {} } = event || {};
-  const { attributes } = session;
-  const { slots = {} } = intent;
+  const { request, session } = event || {};
+  const { attributes } = session || {};
 
-  const handler = router(request, new Skill()) || NotFound;
-  const intentData = Object.values(slots).reduce((state, { name, value }) => (
-    (name && value != null) ? { ...state, [name]: value } : state
-  ), {});
+  const skill = new Skill(session);
+  const [result] = skill.annotated.map(fn => skill[fn](request)).filter(result => !!result);
 
-  return Promise.resolve(handler(intentData)).then(response => {
-    return response && (response instanceof Response) ? response.state : response;
-  }).then(response => {
+  return Promise.resolve(result || NotFound).then(response => (
+    response && response instanceof Response ? response.state : response
+  )).then(response => {
     const data = {
-      version: "1.0",
+      version: '1.0',
       response: { shouldEndSession: true, ...response },
       ...(attributes && { sessionAttributes: attributes })
     };
@@ -28,7 +24,7 @@ export default (router = Router) => (Skill) => (event, context) => {
     succeed(response && data);
     return data;
   }).catch(error => {
-    fail(error || "Unknown error");
+    fail(error || 'Unknown error');
     return error;
   });
 };

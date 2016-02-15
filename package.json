@@ -2,29 +2,35 @@
   "author": "Cameron Hunter <hello@cameronhunter.co.uk> (http://cameronhunter.co.uk)",
   "name": "alexa-lambda-skill",
   "description": "Create Alexa Skills for AWS Lambda, easily.",
-  "version": "0.1.33",
-  "main": "dist/index.js",
+  "version": "0.2.0",
+  "main": "build/main/index.js",
+  "jsnext:main": "src/index.js",
   "license": "MIT",
   "repository": "cameronhunter/alexa-lambda-skill",
   "files": [
-    "dist"
+    "build/main",
+    "src"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "lint": "eslint src/**/*.js test/**/*.js",
+    "build:prod": "webpack --config webpack.config.js",
+    "build:test": "webpack --config webpack.test.config.js",
+    "build": "npm run build:prod && npm run build:test",
     "pretest": "npm run build",
-    "test": "ava -r babel-register -r babel-polyfill",
+    "test": "ava test/index.js",
     "prepublish": "npm test"
   },
   "devDependencies": {
     "ava": "^0.11.0",
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^6.2.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-polyfill": "^6.5.0",
-    "babel-preset-es2015-rollup": "^1.1.1",
+    "babel-preset-es2015": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
-    "babel-register": "^6.5.1",
-    "rollup": "^0.25.3",
-    "rollup-plugin-babel": "^2.3.9",
-    "rollup-plugin-multi-entry": "^1.1.0"
+    "bluebird": "^3.3.1",
+    "eslint": "^2.0.0",
+    "object-values": "^1.0.0",
+    "webpack": "^1.12.13"
   },
   "keywords": [
     "alexa",

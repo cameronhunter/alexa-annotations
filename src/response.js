@@ -10,15 +10,15 @@ export default class Response {
   }
 
   say(text) {
-    return new Response(this.state, { outputSpeech: { type: "PlainText", text } });
+    return new Response(this.state, { outputSpeech: { type: 'PlainText', text } });
   }
 
-  card(title, content, type = "Simple") {
+  card(title, content, type = 'Simple') {
     return new Response(this.state, { card: { type, title, content } });
   }
 
   reprompt(text) {
-    return new Response(this.state, { reprompt: { outputSpeech: { type: "PlainText", text } } });
+    return new Response(this.state, { reprompt: { outputSpeech: { type: 'PlainText', text } } });
   }
 
   shouldEndSession(shouldEndSession) {
