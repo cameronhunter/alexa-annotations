@@ -5,7 +5,7 @@ export default class HelloWorld {
 
   @Launch
   launch() {
-    return Response.say('Welcome to the Alexa Skills Kit, you can say hello').reprompt('You can say hello');
+    return Response.ask('Welcome to the Alexa Skills Kit, you can say hello').reprompt('You can say hello');
   }
 
   @Intent('HelloWorldIntent')
@@ -15,7 +15,7 @@ export default class HelloWorld {
 
   @Intent('AMAZON.HelpIntent')
   help() {
-    return Response.say('You can say hello to me!').reprompt('You can say hello to me!');
+    return Response.ask('You can say hello to me!').reprompt('You can say hello to me!');
   }
 
 }

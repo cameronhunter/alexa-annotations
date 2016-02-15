@@ -10,7 +10,7 @@ test('LaunchRequest', t => {
     t.same(response, {
       version: '1.0',
       response: {
-        shouldEndSession: true,
+        shouldEndSession: false,
         outputSpeech: { type: 'PlainText', text: 'Welcome to the Alexa Skills Kit, you can say hello' },
         reprompt: { outputSpeech: { type: 'PlainText', text: 'You can say hello' } }
       }
@@ -49,7 +49,7 @@ test('AMAZON.HelpIntent', t => {
     t.same(response, {
       version: '1.0',
       response: {
-        shouldEndSession: true,
+        shouldEndSession: false,
         outputSpeech: { type: 'PlainText', text: 'You can say hello to me!' },
         reprompt: { outputSpeech: { type: 'PlainText', text: 'You can say hello to me!' } }
       }
