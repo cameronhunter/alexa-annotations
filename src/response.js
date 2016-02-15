@@ -1,3 +1,7 @@
+export const SSML = 'SSML';
+export const PlainText = 'PlainText';
+export const Simple = 'Simple';
+
 export default class Response {
   static ask = (...args) => new Response().ask(...args);
   static say = (...args) => new Response().say(...args);
@@ -10,7 +14,7 @@ export default class Response {
   }
 
   ask(text, type) {
-    return new Response(this.state).say(text, type).shouldEndSession(false);
+    return this.say(text, type).shouldEndSession(false);
   }
 
   say(text, type) {
@@ -33,7 +37,7 @@ export default class Response {
     });
   }
 
-  card(title, content, type = 'Simple') {
+  card(title, content, type = Simple) {
     return new Response({
       ...this.state,
       response: {
@@ -76,9 +80,9 @@ export default class Response {
   }
 }
 
-const outputSpeech = (text, type = 'PlainText') => {
+const outputSpeech = (text, type = PlainText) => {
   switch (type) {
-    case 'SSML':
+    case SSML:
       return { outputSpeech: { type, ssml: `<speak>${text}</speak>` } };
     default:
       return { outputSpeech: { type, text } };
