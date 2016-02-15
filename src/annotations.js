@@ -1,8 +1,15 @@
 const annotation = (predicate, transform = i => i) => (target, name) => {
   const fn = target[name];
+  const annotations = target.annotated || [];
+  const previousPredicate = target[name].predicate || (() => false);
 
-  target.annotated = [...(target.annotated || []), name];
-  target[name] = (...args) => predicate(...args) && fn.call(target, transform(...args), ...args);
+
+  if (annotations.indexOf(name) < 0) {
+    target.annotated = [...annotations, name];
+    target[name] = (...args) => target[name].predicate(...args) && fn.call(target, transform(...args), ...args);
+  }
+
+  target[name].predicate = (...args) => previousPredicate(...args) || predicate(...args);
 
   return target;
 };

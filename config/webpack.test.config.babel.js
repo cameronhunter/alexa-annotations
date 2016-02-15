@@ -5,6 +5,7 @@ export default {
   entry: {
     "example/HelloWorld": './example/HelloWorld/index.js',
     "example/HistoryBuff": './example/HistoryBuff/index.js',
-    "example/MinecraftHelper": './example/MinecraftHelper/index.js'
+    "example/MinecraftHelper": './example/MinecraftHelper/index.js',
+    "example/SpaceGeek": './example/SpaceGeek/index.js'
   }
 };
