@@ -1,5 +1,5 @@
 import test from 'ava';
-import MinecraftHelper from '../../build/example/minecraftHelper';
+import MinecraftHelper from '../../build/example/MinecraftHelper';
 
 test('LaunchRequest', t => {
   const event = {

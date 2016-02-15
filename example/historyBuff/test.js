@@ -1,5 +1,5 @@
 import test from 'ava';
-import HistoryBuff from '../../build/example/historyBuff';
+import HistoryBuff from '../../build/example/HistoryBuff';
 
 test('launch', t => {
   const event = {

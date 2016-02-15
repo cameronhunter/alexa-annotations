@@ -1,5 +1,5 @@
 import test from 'ava';
-import HelloWorld from '../../build/example/helloWorld';
+import HelloWorld from '../../build/example/HelloWorld';
 
 test('LaunchRequest', t => {
   const event = {
