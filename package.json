@@ -14,9 +14,9 @@
   "scripts": {
     "lint": "eslint src/**/*.js test/**/*.js example/**/*.js",
     "build:library": "webpack --config config/webpack.build.config.babel.js",
-    "build": "npm run build:library",
     "build:test": "webpack --config config/webpack.test.config.babel.js",
-    "pretest": "npm run build:library && npm run build:test",
+    "build": "npm run build:library && npm run build:test",
+    "pretest": "npm run build",
     "test": "ava test/**/*test.js example/**/*test.js",
     "posttest": "npm run lint",
     "prepublish": "npm test"
