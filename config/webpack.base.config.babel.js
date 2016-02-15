@@ -9,11 +9,13 @@ export default {
   },
   module: {
     loaders: [
+      { test: /\.json$/, loader: 'json-loader' },
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
     ]
   },
   plugins: [
     new webpack.ProvidePlugin({
+      'fetch': 'isomorphic-fetch',
       'Promise': 'bluebird',
       'Object.values': 'object-values'
     }),

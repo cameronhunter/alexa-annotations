@@ -4,6 +4,7 @@ export default {
   ...config,
   entry: {
     "example/echo": './example/echo/index.js',
-    "example/helloWorld": './example/helloWorld/index.js'
+    "example/helloWorld": './example/helloWorld/index.js',
+    "example/historyBuff": './example/historyBuff/index.js'
   }
 };

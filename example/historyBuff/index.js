@@ -1,0 +1,84 @@
+import { Skill, Response, Intent, Launch } from '../../build/alexa-lambda-skill';
+import wikipedia from './wikipedia';
+
+const PaginationSize = 3;
+const MonthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const IntroText = 'With History Buff, you can get historical events for any day of the year. For example, you could say today, or August thirtieth. Now, which day do you want?';
+
+@Skill
+export default class HistoryBuff {
+
+  constructor(attributes = {}) {
+    this.result = attributes.result;
+    this.index = attributes.index;
+  }
+
+  @Launch
+  launch() {
+    return Response
+            .ask('<p>History buff.</p> <p>What day do you want events for?</p>', 'SSML')
+            .card('This Day in History', 'History Buff. What day do you want events for?')
+            .reprompt(IntroText);
+  }
+
+  @Intent('GetFirstEventIntent')
+  firstEvent({ day }) {
+    const date = day ? new Date(day) : new Date();
+    const monthName = MonthNames[date.getMonth()];
+    const cardTitle = `Events on ${monthName} ${date.getDate()}`;
+
+    return wikipedia(monthName, date.getDate()).then(result => {
+      const events = result.slice(0, PaginationSize);
+      const speechText = events.reduce((state, event) => `<p>${state}${event}</p>`, '');
+
+      return Response
+              .ask(`<p>For ${monthName} ${date.getDate()}, </p> ${speechText} <p>Wanna go deeper in history?</p>`, 'SSML')
+              .card(cardTitle, `For ${monthName} ${date.getDate()}, ${events.join(' ')}`)
+              .reprompt(IntroText)
+              .attributes({ result, index: PaginationSize });
+    }).catch(error => {
+      return Response.say(error).card(cardTitle, error);
+    });
+  }
+
+  @Intent('GetNextEventIntent')
+  nextEvent() {
+    const cardTitle = 'More events on this day in history';
+    const repromptText = 'Do you want to know more about what happened on this date?';
+
+    if (!this.result) {
+      return Response
+              .ask(IntroText)
+              .card(cardTitle, IntroText)
+              .reprompt(repromptText);
+    } else if (this.index >= this.result.length) {
+      return Response
+              .ask('There are no more events for this date. Try another date by saying <break time="0.3s"/> get events for august thirtieth.', 'SSML')
+              .card(cardTitle, 'There are no more events for this date. Try another date by saying, get events for august thirtieth.')
+              .reprompt(repromptText);
+    }
+
+    const index = this.index + PaginationSize;
+    const events = this.result.slice(this.index, index);
+    const moreContent = index < this.result.length;
+    const speechText = events.reduce((state, event) => `<p>${state}${event}</p>`, '');
+    const cardContent = events.join(' ');
+
+    return Response
+            .ask(speechText + (moreContent ? ' Wanna go deeper in history?' : ''), 'SSML')
+            .card(cardTitle, cardContent + (moreContent ? ' Wanna go deeper in history?' : ''))
+            .reprompt(repromptText)
+            .attributes({ result, index });
+  }
+
+  @Intent('AMAZON.CancelIntent', 'AMAZON.StopIntent')
+  stop() {
+    return Response.say('Goodbye');
+  }
+
+  @Intent('AMAZON.HelpIntent')
+  help() {
+    return Response.ask(IntroText).reprompt('Which day do you want?');
+  }
+
+}

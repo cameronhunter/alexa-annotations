@@ -1,6 +1,24 @@
 import test from 'ava';
 import { Response } from '..';
 
+test('ask', t => {
+  t.same(Response.ask('Hello world').build(), {
+    version: '1.0',
+    response: {
+      shouldEndSession: false,
+      outputSpeech: { type: 'PlainText', text: 'Hello world' }
+    }
+  });
+
+  t.same(Response.ask('<p>Hello World.</p> <p>What do you want to do today?</p>', 'SSML').build(), {
+    version: '1.0',
+    response: {
+      shouldEndSession: false,
+      outputSpeech: { type: 'SSML', ssml: '<speak><p>Hello World.</p> <p>What do you want to do today?</p></speak>' }
+    }
+  });
+});
+
 test('say', t => {
   t.same(Response.say('Hello world').build(), {
     version: '1.0',
@@ -14,7 +32,7 @@ test('say', t => {
     version: '1.0',
     response: {
       shouldEndSession: true,
-      outputSpeech: { type: 'SSML', ssml: '<speech><p>Hello World.</p> <p>What do you want to do today?</p></speech>' }
+      outputSpeech: { type: 'SSML', ssml: '<speak><p>Hello World.</p> <p>What do you want to do today?</p></speak>' }
     }
   });
 });
