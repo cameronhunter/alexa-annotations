@@ -1,12 +1,14 @@
-var webpack = require('webpack');
+import webpack from 'webpack';
 
-module.exports = {
-  entry: './src/index.js',
+export default {
+  entry: {
+    "library": './src/index.js'
+  },
   target: 'node',
   output: {
     libraryTarget: 'commonjs2',
-    filename: 'index.js',
-    path: './build/main'
+    filename: '[name].js',
+    path: './build'
   },
   module: {
     loaders: [

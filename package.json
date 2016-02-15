@@ -2,22 +2,23 @@
   "author": "Cameron Hunter <hello@cameronhunter.co.uk> (http://cameronhunter.co.uk)",
   "name": "alexa-lambda-skill",
   "description": "Create Alexa Skills for AWS Lambda, easily.",
-  "version": "0.2.0",
-  "main": "build/main/index.js",
+  "version": "1.0.0",
+  "main": "build/library.js",
   "jsnext:main": "src/index.js",
   "license": "MIT",
   "repository": "cameronhunter/alexa-lambda-skill",
   "files": [
-    "build/main",
+    "build/library.js",
     "src"
   ],
   "scripts": {
-    "lint": "eslint src/**/*.js test/**/*.js",
-    "build:prod": "webpack --config webpack.config.js",
-    "build:test": "webpack --config webpack.test.config.js",
-    "build": "npm run build:prod && npm run build:test",
+    "lint": "eslint src/**/*.js test/**/*.js example/**/*.js",
+    "build:prod": "webpack --config webpack.prod.config.babel.js",
+    "build:example": "webpack --config webpack.example.config.babel.js",
+    "build": "npm run build:prod && npm run build:example",
     "pretest": "npm run build",
-    "test": "ava test/index.js",
+    "test": "ava test/**/*test.js example/**/*test.js",
+    "posttest": "npm run lint",
     "prepublish": "npm test"
   },
   "devDependencies": {

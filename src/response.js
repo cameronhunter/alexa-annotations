@@ -5,8 +5,7 @@ export default class Response {
   static shouldEndSession = (...args) => new Response().shouldEndSession(...args);
 
   constructor(...args) {
-    const state = args.reduce((result, item) => ({ ...result, ...item }), {});
-    this.state = { shouldEndSession: true, ...state };
+    this.state = args.reduce((result, item) => ({ ...result, ...item }), {});
   }
 
   say(text) {
@@ -23,5 +22,16 @@ export default class Response {
 
   shouldEndSession(shouldEndSession) {
     return new Response(this.state, { shouldEndSession });
+  }
+
+  build(attributes) {
+    return {
+      version: '1.0',
+      response: {
+        shouldEndSession: true,
+        ...this.state
+      },
+      ...(attributes && { sessionAttributes: attributes })
+    };
   }
 }
