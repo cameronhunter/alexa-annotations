@@ -22,6 +22,7 @@ export default class Response {
       ...this.state,
       response: {
         ...this.state.response,
+        shouldEndSession: true,
         ...outputSpeech(text, type)
       }
     });
