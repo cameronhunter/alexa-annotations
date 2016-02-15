@@ -4,11 +4,10 @@ const NotFound = Response.say('I\'m sorry, I don\'t know how to do that.');
 
 export default Skill => (event, context) => {
   const { succeed, fail } = context || {};
-
   const { request, session } = event || {};
   const { attributes } = session || {};
 
-  const skill = new Skill(session);
+  const skill = new Skill(attributes);
   const [result] = skill.annotated.map(fn => skill[fn](request)).filter(result => !!result);
 
   return Promise.resolve(result || NotFound).then(response => (
