@@ -1,4 +1,4 @@
-import config from './webpack.prod.config.babel.js';
+import config from './webpack.base.config.babel.js';
 
 export default {
   ...config,

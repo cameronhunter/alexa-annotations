@@ -1,4 +1,4 @@
-import { Skill, Response, Intent, Launch } from '../..';
+import { Skill, Response, Intent, Launch } from '../../build/alexa-lambda-skill';
 
 @Skill
 export default class Echo {

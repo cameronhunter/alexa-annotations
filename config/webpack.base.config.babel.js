@@ -1,9 +1,6 @@
 import webpack from 'webpack';
 
 export default {
-  entry: {
-    "library": './src/index.js'
-  },
   target: 'node',
   output: {
     libraryTarget: 'commonjs2',
@@ -21,7 +18,6 @@ export default {
       'Object.values': 'object-values'
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(true),
-    new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(true)
   ]
 };

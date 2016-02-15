@@ -3,20 +3,20 @@
   "name": "alexa-lambda-skill",
   "description": "Create Alexa Skills for AWS Lambda, easily.",
   "version": "1.0.0",
-  "main": "build/library.js",
+  "main": "build/alexa-lambda-skill/index.min.js",
   "jsnext:main": "src/index.js",
   "license": "MIT",
   "repository": "cameronhunter/alexa-lambda-skill",
   "files": [
-    "build/library.js",
+    "build/alexa-lambda-skill",
     "src"
   ],
   "scripts": {
     "lint": "eslint src/**/*.js test/**/*.js example/**/*.js",
-    "build:prod": "webpack --config webpack.prod.config.babel.js",
-    "build:example": "webpack --config webpack.example.config.babel.js",
-    "build": "npm run build:prod && npm run build:example",
-    "pretest": "npm run build",
+    "build:library": "webpack --config config/webpack.build.config.babel.js",
+    "build": "npm run build:library",
+    "build:test": "webpack --config config/webpack.test.config.babel.js",
+    "pretest": "npm run build:library && npm run build:test",
     "test": "ava test/**/*test.js example/**/*test.js",
     "posttest": "npm run lint",
     "prepublish": "npm test"
