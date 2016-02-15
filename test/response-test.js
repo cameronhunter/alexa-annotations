@@ -9,6 +9,14 @@ test('say', t => {
       outputSpeech: { type: 'PlainText', text: 'Hello world' }
     }
   });
+
+  t.same(Response.say('<p>Hello World.</p> <p>What do you want to do today?</p>', 'SSML').build(), {
+    version: '1.0',
+    response: {
+      shouldEndSession: true,
+      outputSpeech: { type: 'SSML', ssml: '<speech><p>Hello World.</p> <p>What do you want to do today?</p></speech>' }
+    }
+  });
 });
 
 test('card', t => {
