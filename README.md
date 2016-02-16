@@ -26,6 +26,10 @@ export default class Echo {
   help() {
     return Response.say('I repeat whatever you say to me!');
   }
+  
+  stop('AMAZON.CancelIntent', 'AMAZON.StopIntent') {
+    return Response.say('Goodbye');
+  }
 
   @Intent('Credits')
   credits() {
