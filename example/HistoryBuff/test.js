@@ -1,5 +1,5 @@
 import test from 'ava';
-import Request from '../../build/request';
+import { Request } from '../../build/alexa-lambda-skill';
 import HistoryBuff from '../../build/example/HistoryBuff';
 
 test('launch', t => {

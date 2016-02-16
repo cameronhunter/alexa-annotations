@@ -1,5 +1,5 @@
 import test from 'ava';
-import Request from '../../build/request';
+import { Request } from '../../build/alexa-lambda-skill';
 import MinecraftHelper from '../../build/example/MinecraftHelper';
 
 test('LaunchRequest', t => {

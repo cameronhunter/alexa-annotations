@@ -18,4 +18,12 @@ export default class HelloWorld {
     return Response.ask('You can say hello to me!').reprompt('You can say hello to me!');
   }
 
+  @Intent('Credits')
+  credits() {
+    const url = 'https://raw.githubusercontent.com/cameronhunter/alexa-lambda-skill/master/package.json';
+    return fetch(url).then(response => response.json()).then(({ author }) => {
+      return Response.say(`Hello World was created by ${author.name}`).card('Hello World', `Credits: ${author.name} <${author.email}> (${author.url})`);
+    });
+  }
+
 }

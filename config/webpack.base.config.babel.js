@@ -16,6 +16,7 @@ export default {
   plugins: [
     new webpack.ProvidePlugin({
       'fetch': 'isomorphic-fetch',
+      'global.Promise': 'bluebird',
       'Promise': 'bluebird',
       'Object.entries': 'object.entries',
       'Object.values': 'object-values'

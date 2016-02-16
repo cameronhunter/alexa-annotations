@@ -1,6 +1,6 @@
 import test from 'ava';
 import sinon from 'sinon';
-import Request from '../../build/request';
+import { Request } from '../../build/alexa-lambda-skill';
 import SpaceGeek from '../../build/example/SpaceGeek';
 
 test.before(() => {
