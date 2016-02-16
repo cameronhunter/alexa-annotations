@@ -1,10 +1,9 @@
 import test from 'ava';
+import Request from '../../build/request';
 import HistoryBuff from '../../build/example/HistoryBuff';
 
 test('launch', t => {
-  const event = {
-    request: { type: 'LaunchRequest' }
-  };
+  const event = Request.launchRequest().build();
 
   return HistoryBuff(event).then(response => {
     t.same(response, {
@@ -20,20 +19,7 @@ test('launch', t => {
 });
 
 test.skip('GetFirstEventIntent', t => {
-  const event = {
-    request: {
-      type: 'IntentRequest',
-      intent: {
-        name: 'GetFirstEventIntent',
-        slots: {
-          day: {
-            name: 'day',
-            value: 465302909000
-          }
-        }
-      }
-    }
-  };
+  const event = Request.intent('GetFirstEventIntent', { day: 465302909000 });
 
   return HistoryBuff(event).then(response => {
     t.same(response, {

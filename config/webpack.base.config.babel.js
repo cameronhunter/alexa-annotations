@@ -17,6 +17,7 @@ export default {
     new webpack.ProvidePlugin({
       'fetch': 'isomorphic-fetch',
       'Promise': 'bluebird',
+      'Object.entries': 'object.entries',
       'Object.values': 'object-values'
     }),
     new webpack.optimize.DedupePlugin(),

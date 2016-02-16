@@ -1,10 +1,9 @@
 import test from 'ava';
+import Request from '../../build/request';
 import HelloWorld from '../../build/example/HelloWorld';
 
 test('LaunchRequest', t => {
-  const event = {
-    request: { type: 'LaunchRequest' }
-  };
+  const event = Request.launchRequest().build();
 
   return HelloWorld(event).then(response => {
     t.same(response, {
@@ -19,14 +18,7 @@ test('LaunchRequest', t => {
 });
 
 test('HelloWorldIntent', t => {
-  const event = {
-    request: {
-      type: 'IntentRequest',
-      intent: {
-        name: 'HelloWorldIntent'
-      }
-    }
-  };
+  const event = Request.intent('HelloWorldIntent').build();
 
   return HelloWorld(event).then(response => {
     t.same(response, {
@@ -41,9 +33,7 @@ test('HelloWorldIntent', t => {
 });
 
 test('AMAZON.HelpIntent', t => {
-  const event = {
-    request: { type: 'IntentRequest', intent: { name: 'AMAZON.HelpIntent' } }
-  };
+  const event = Request.intent('AMAZON.HelpIntent').build();
 
   return HelloWorld(event).then(response => {
     t.same(response, {

@@ -1,10 +1,9 @@
 import test from 'ava';
+import Request from '../../build/request';
 import MinecraftHelper from '../../build/example/MinecraftHelper';
 
 test('LaunchRequest', t => {
-  const event = {
-    request: { type: 'LaunchRequest' }
-  };
+  const event = Request.launchRequest().build();
 
   return MinecraftHelper(event).then(response => {
     t.same(response, {
@@ -19,17 +18,7 @@ test('LaunchRequest', t => {
 });
 
 test('RecipeIntent', t => {
-  const event = {
-    request: {
-      type: 'IntentRequest',
-      intent: {
-        name: 'RecipeIntent',
-        slots: {
-          Item: { name: 'Item', value: 'Farmland' }
-        }
-      }
-    }
-  };
+  const event = Request.intent('RecipeIntent', { Item: 'Farmland' }).build();
 
   return MinecraftHelper(event).then(response => {
     t.same(response, {
@@ -44,17 +33,7 @@ test('RecipeIntent', t => {
 });
 
 test('Unknown recipe', t => {
-  const event = {
-    request: {
-      type: 'IntentRequest',
-      intent: {
-        name: 'RecipeIntent',
-        slots: {
-          Item: { name: 'Item', value: 'Coffee' }
-        }
-      }
-    }
-  };
+  const event = Request.intent('RecipeIntent', { Item: 'Coffee' }).build();
 
   return MinecraftHelper(event).then(response => {
     t.same(response, {
@@ -69,12 +48,7 @@ test('Unknown recipe', t => {
 });
 
 test('No recipe', t => {
-  const event = {
-    request: {
-      type: 'IntentRequest',
-      intent: { name: 'RecipeIntent' }
-    }
-  };
+  const event = Request.intent('RecipeIntent').build();
 
   return MinecraftHelper(event).then(response => {
     t.same(response, {

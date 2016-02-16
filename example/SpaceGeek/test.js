@@ -1,5 +1,6 @@
 import test from 'ava';
 import sinon from 'sinon';
+import Request from '../../build/request';
 import SpaceGeek from '../../build/example/SpaceGeek';
 
 test.before(() => {
@@ -11,9 +12,7 @@ test.after(() => {
 });
 
 test('LaunchRequest', t => {
-  const event = {
-    request: { type: 'LaunchRequest' }
-  };
+  const event = Request.launchRequest().build();
 
   return SpaceGeek(event).then(response => {
     t.same(response, {
@@ -28,9 +27,7 @@ test('LaunchRequest', t => {
 });
 
 test('GetNewFactIntent', t => {
-  const event = {
-    request: { type: 'IntentRequest', intent: { name: 'GetNewFactIntent' } }
-  };
+  const event = Request.intent('GetNewFactIntent').build();
 
   return SpaceGeek(event).then(response => {
     t.same(response, {
