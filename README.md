@@ -24,7 +24,7 @@ export default class Echo {
 
   @Intent('AMAZON.HelpIntent')
   help() {
-    return Response.say('I repeat whatever you say to me!');
+    return Response.ask('I repeat whatever you say to me! What would you like me to repeat?');
   }
   
   @Intent('AMAZON.CancelIntent', 'AMAZON.StopIntent')
