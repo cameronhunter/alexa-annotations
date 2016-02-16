@@ -27,7 +27,8 @@ export default class Echo {
     return Response.say('I repeat whatever you say to me!');
   }
   
-  stop('AMAZON.CancelIntent', 'AMAZON.StopIntent') {
+  @Intent('AMAZON.CancelIntent', 'AMAZON.StopIntent')
+  stop() {
     return Response.say('Goodbye');
   }
 
