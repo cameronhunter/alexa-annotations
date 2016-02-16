@@ -1,5 +1,9 @@
 {
-  "author": "Cameron Hunter <hello@cameronhunter.co.uk> (http://cameronhunter.co.uk)",
+  "author": {
+    "name": "Cameron Hunter",
+    "email": "hello@cameronhunter.co.uk",
+    "url": "http://cameronhunter.co.uk"
+  },
   "name": "alexa-lambda-skill",
   "description": "Create Alexa Skills for AWS Lambda, easily.",
   "version": "1.1.0",
