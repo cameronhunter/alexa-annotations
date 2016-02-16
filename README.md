@@ -14,7 +14,7 @@ export default class Echo {
 
   @Launch
   launch() {
-    return Response.say('Welcome to the example Echo skill!');
+    return Response.ask('Welcome to the example Echo skill! What would you like me to repeat?');
   }
 
   @Intent('echo')
