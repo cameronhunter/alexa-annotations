@@ -6,7 +6,7 @@
   },
   "name": "alexa-lambda-skill",
   "description": "Create Alexa Skills for AWS Lambda, easily.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "build/alexa-lambda-skill/index.min.js",
   "jsnext:main": "src/index.js",
   "license": "MIT",
