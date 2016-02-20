@@ -23,8 +23,8 @@
     "pretest": "npm run build",
     "test": "ava test/**/*test.js example/**/*test.js",
     "posttest": "npm run lint",
-    "postversion": "git push --tags",
-    "prepublish": "npm test"
+    "preversion": "npm test",
+    "postversion": "git push --tags"
   },
   "devDependencies": {
     "ava": "^0.12.0",
