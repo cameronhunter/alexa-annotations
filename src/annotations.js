@@ -1,11 +1,11 @@
-const annotation = (predicate, transform = i => i) => (target, name) => {
-  const route = target.route || (() => false);
+const annotation = (predicate, transform = i => i) => (skill, name) => {
+  const route = skill.route || (() => false);
 
-  target.route = (...args) => {
-    return route(...args) || (predicate(...args) && target[name].call(target, transform(...args), ...args));
+  skill.route = (...args) => {
+    return route(...args) || (predicate(...args) && skill[name].call(skill, transform(...args), ...args));
   };
 
-  return target;
+  return skill;
 };
 
 export const Launch = annotation(

@@ -8,9 +8,9 @@ export default Skill => (event, context) => {
   const { attributes } = session || {};
 
   const skill = new Skill(attributes);
-  const result = skill.route && skill.route(request);
+  const result = (skill.route && skill.route(request)) || NotFound;
 
-  return Promise.resolve(result || NotFound).then(response => (
+  return Promise.resolve(result).then(response => (
     response instanceof Response ? response.build(attributes) : response
   )).then(response => {
     succeed && succeed(response);
