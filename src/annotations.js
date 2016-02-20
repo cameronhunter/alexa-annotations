@@ -1,14 +1,18 @@
 const annotation = (predicate, transform = i => i) => (target, name) => {
-  const fn = target[name];
-  const annotations = target.annotated || [];
-  const previousPredicate = target[name].predicate || (() => false);
+  target.annotations = target.annotations || {};
 
-  if (annotations.indexOf(name) < 0) {
-    target.annotated = [...annotations, name];
-    target[name] = (...args) => target[name].predicate(...args) && fn.call(target, transform(...args), ...args);
+  if (Object.keys(target.annotations).indexOf(name) < 0) {
+    target.annotations = {
+      ...target.annotations,
+      [name]: (...args) => {
+        return target.annotations[name].predicate(...args) && target[name].call(target, transform(...args), ...args);
+      }
+    };
   }
 
-  target[name].predicate = (...args) => previousPredicate(...args) || predicate(...args);
+  const previousPredicate = (target.annotations[name] && target.annotations[name].predicate) || (() => false);
+
+  target.annotations[name].predicate = (...args) => previousPredicate(...args) || predicate(...args);
 
   return target;
 };
@@ -18,8 +22,7 @@ export const Launch = annotation(
 );
 
 export const SessionEnded = annotation(
-  ({ type }) => type === 'SessionEndedRequest',
-  ({ reason }) => reason
+  ({ type }) => type === 'SessionEndedRequest'
 );
 
 export const Intent = (...names) => annotation(

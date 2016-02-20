@@ -8,7 +8,7 @@ export default Skill => (event, context) => {
   const { attributes } = session || {};
 
   const skill = new Skill(attributes);
-  const [result] = skill.annotated.map(fn => skill[fn](request)).filter(result => !!result);
+  const [result] = Object.values(skill.annotations).map(fn => fn(request)).filter(result => !!result);
 
   return Promise.resolve(result || NotFound).then(response => (
     response instanceof Response ? response.build(attributes) : response
