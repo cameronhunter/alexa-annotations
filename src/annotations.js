@@ -1,8 +1,8 @@
 const annotation = (predicate, transform = i => i) => (target, name) => {
-  const previous = target.route || (() => false);
+  const route = target.route || (() => false);
 
   target.route = (...args) => {
-    return previous(...args) || (predicate(...args) && target[name].call(target, transform(...args), ...args));
+    return route(...args) || (predicate(...args) && target[name].call(target, transform(...args), ...args));
   };
 
   return target;
