@@ -1,18 +1,9 @@
 const annotation = (predicate, transform = i => i) => (target, name) => {
-  target.annotations = target.annotations || {};
+  const previous = target.route || (() => false);
 
-  if (Object.keys(target.annotations).indexOf(name) < 0) {
-    target.annotations = {
-      ...target.annotations,
-      [name]: (...args) => {
-        return target.annotations[name].predicate(...args) && target[name].call(target, transform(...args), ...args);
-      }
-    };
-  }
-
-  const previousPredicate = (target.annotations[name] && target.annotations[name].predicate) || (() => false);
-
-  target.annotations[name].predicate = (...args) => previousPredicate(...args) || predicate(...args);
+  target.route = (...args) => {
+    return previous(...args) || (predicate(...args) && target[name].call(target, transform(...args), ...args));
+  };
 
   return target;
 };
