@@ -4,6 +4,8 @@
 
 Easily create Alexa Skills to run on AWS Lambda using ES6 classes, promises, and ES7 decorators.
 
+Try it in the [online playground](http://cameronhunter.github.io/alexa-playground/) or create your own Alexa skill with the [Yeoman generator](https://github.com/cameronhunter/generator-alexa-skill).
+
 ## Example
 
 ```javascript
