@@ -4,7 +4,7 @@ import inject from 'rollup-plugin-inject';
 
 // var required due to node v0.10.36 target
 var production = process.env.NODE_ENV == 'production';
-var nonNull = array => array.filter(value => !!value);
+var nonNull = function(array) { return array.filter(value => !!value); }
 
 export default {
   entry: 'src/index.js',
