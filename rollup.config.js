@@ -2,13 +2,13 @@ import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
 import inject from 'rollup-plugin-inject';
 
-const production = process.env.NODE_ENV == 'production';
-const dest = production ? 'build/index.min.js' : 'build/index.js';
-const nonNull = array => array.filter(value => !!value);
+// var required due to node v0.10.36 target
+var production = process.env.NODE_ENV == 'production';
+var nonNull = array => array.filter(value => !!value);
 
 export default {
   entry: 'src/index.js',
-  dest,
+  dest: production ? 'build/index.min.js' : 'build/index.js',
   format: 'cjs',
   plugins: nonNull([
     babel({
