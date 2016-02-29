@@ -1,4 +1,4 @@
-import { Skill, Intent, Launch } from '../../src';
+import { Skill, Intent, Launch } from '../..';
 import Response from 'alexa-response';
 import wikipedia from './wikipedia';
 
