@@ -1,12 +1,13 @@
-import babel from 'rollup-plugin-babel';
-import uglify from 'rollup-plugin-uglify';
-import inject from 'rollup-plugin-inject';
+// Written in ES5 for Node v0.10.36 compatibility
 
-// var required due to node v0.10.36 target
+var babel = require('rollup-plugin-babel');
+var uglify = require('rollup-plugin-uglify');
+var inject = require('rollup-plugin-inject');
+
 var production = process.env.NODE_ENV == 'production';
-var nonNull = function(array) { return array.filter(value => !!value); }
+var nonNull = function(array) { return array.filter(function(value) { return !!value; }); }
 
-export default {
+module.exports = {
   entry: 'src/index.js',
   dest: production ? 'build/index.min.js' : 'build/index.js',
   format: 'cjs',
