@@ -1,5 +1,6 @@
 import { Skill, Intent, Launch } from '../..';
 import Response from 'alexa-response';
+import fetch from 'isomorphic-fetch';
 
 @Skill
 export default class HelloWorld {
