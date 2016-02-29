@@ -1,6 +1,6 @@
 import test from 'ava';
-import { Request } from '../../build/alexa-lambda-skill';
-import MinecraftHelper from '../../build/example/MinecraftHelper';
+import Request from '../../src/request';
+import MinecraftHelper from './index';
 
 test('LaunchRequest', t => {
   const event = Request.launchRequest().build();

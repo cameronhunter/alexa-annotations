@@ -1,6 +1,6 @@
 import test from 'ava';
-import { Request } from '../../build/alexa-lambda-skill';
-import HistoryBuff from '../../build/example/HistoryBuff';
+import Request from '../../src/request';
+import HistoryBuff from './index';
 
 test('launch', t => {
   const event = Request.launchRequest().build();

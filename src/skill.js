@@ -1,6 +1,6 @@
-import Response from './response';
+import { say } from 'alexa-response';
 
-const NotFound = Response.say('I\'m sorry, I don\'t know how to do that.');
+const NotFound = say('I\'m sorry, I don\'t know how to do that.');
 
 export default Skill => (event, context) => {
   const { succeed, fail } = context || {};
@@ -11,7 +11,7 @@ export default Skill => (event, context) => {
   const result = (skill.route && skill.route(request)) || NotFound;
 
   return Promise.resolve(result).then(response => (
-    response instanceof Response ? response.build(attributes) : response
+    (response.build && typeof response.build === 'function') ? response.build(attributes) : response
   )).then(response => {
     succeed && succeed(response);
     return response;

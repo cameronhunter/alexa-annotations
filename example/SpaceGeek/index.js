@@ -1,4 +1,5 @@
-import { Skill, Response, Intent, Launch } from '../../build/alexa-lambda-skill';
+import { Skill, Intent, Launch } from '../../src';
+import Response from 'alexa-response';
 
 const SPACE_FACTS = [
   'A year on Mercury is just 88 days long.',

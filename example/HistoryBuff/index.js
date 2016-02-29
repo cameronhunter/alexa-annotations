@@ -1,4 +1,5 @@
-import { Skill, Response, Intent, Launch } from '../../build/alexa-lambda-skill';
+import { Skill, Intent, Launch } from '../../src';
+import Response from 'alexa-response';
 import wikipedia from './wikipedia';
 
 const { ask, say } = Response;
@@ -17,7 +18,7 @@ export default class HistoryBuff {
 
   @Launch
   launch() {
-    return ask('<p>History buff.</p> <p>What day do you want events for?</p>', 'SSML')
+    return ask('<speak><p>History buff.</p> <p>What day do you want events for?</p></speak>', 'SSML')
             .card('This Day in History', 'History Buff. What day do you want events for?')
             .reprompt(IntroText);
   }
@@ -32,7 +33,7 @@ export default class HistoryBuff {
       const events = result.slice(0, PaginationSize);
       const speechText = events.reduce((state, event) => `<p>${state}${event}</p>`, '');
 
-      return ask(`<p>For ${monthName} ${date.getDate()}, </p> ${speechText} <p>Wanna go deeper in history?</p>`, 'SSML')
+      return ask(`<speak><p>For ${monthName} ${date.getDate()}, </p> ${speechText} <p>Wanna go deeper in history?</p></speak>`, 'SSML')
               .card(cardTitle, `For ${monthName} ${date.getDate()}, ${events.join(' ')}`)
               .reprompt(IntroText)
               .attributes({ result, index: PaginationSize });
@@ -62,7 +63,7 @@ export default class HistoryBuff {
     const speechText = events.reduce((state, event) => `<p>${state}${event}</p>`, '');
     const cardContent = events.join(' ');
 
-    return ask(speechText + (moreContent ? ' Wanna go deeper in history?' : ''), 'SSML')
+    return ask('<speak>' + speechText + (moreContent ? ' Wanna go deeper in history?' : '') + '</speak>', 'SSML')
             .card(cardTitle, cardContent + (moreContent ? ' Wanna go deeper in history?' : ''))
             .reprompt(repromptText)
             .attributes({ result, index });

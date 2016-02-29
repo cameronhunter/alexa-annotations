@@ -1,4 +1,5 @@
-import { Skill, Response, Intent, Launch } from '../../build/alexa-lambda-skill';
+import { Skill, Intent, Launch } from '../../src';
+import Response from 'alexa-response';
 
 @Skill
 export default class HelloWorld {

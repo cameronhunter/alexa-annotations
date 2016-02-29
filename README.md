@@ -7,36 +7,37 @@ Easily create Alexa Skills to run on AWS Lambda using ES6 classes, promises, and
 ## Example
 
 ```javascript
-import { Skill, Response, Intent, Launch } from 'alexa-lambda-skill';
+import { Skill, Intent, Launch } from 'alexa-lambda-skill';
+import { ask, say, card } from 'alexa-response';
 
 @Skill
 export default class Echo {
 
   @Launch
   launch() {
-    return Response.ask('Welcome to the example Echo skill! What would you like me to repeat?');
+    return ask('Welcome to the example Echo skill! What would you like me to repeat?');
   }
 
   @Intent('echo')
   echo({ sentence }) {
-    return Response.say(sentence).card('Echo', sentence);
+    return say(sentence).card('Echo', sentence);
   }
 
   @Intent('AMAZON.HelpIntent')
   help() {
-    return Response.ask('I repeat whatever you say to me! What would you like me to repeat?');
+    return ask('I repeat whatever you say to me! What would you like me to repeat?');
   }
-  
+
   @Intent('AMAZON.CancelIntent', 'AMAZON.StopIntent')
   stop() {
-    return Response.say('Goodbye');
+    return say('Goodbye');
   }
 
   @Intent('Credits')
   credits() {
     const url = 'https://raw.githubusercontent.com/cameronhunter/alexa-lambda-skill/master/package.json';
     return fetch(url).then(response => response.json()).then(({ name, author }) => {
-      return Response.say(`${name} was created by ${author.name}`).card(name, `Credits: ${author.name} <${author.email}> (${author.url})`);
+      return say(`${name} was created by ${author.name}`).card(name, `Credits: ${author.name} <${author.email}> (${author.url})`);
     });
   }
 

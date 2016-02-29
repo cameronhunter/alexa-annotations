@@ -2,6 +2,10 @@ import webpack from 'webpack';
 
 export default {
   target: 'node',
+  entry: {
+    'alexa-lambda-skill/index': './src/index.js',
+    'alexa-lambda-skill/index.min': './src/index.js'
+  },
   output: {
     libraryTarget: 'commonjs2',
     filename: '[name].js',
@@ -22,6 +26,12 @@ export default {
       'Object.values': 'object-values'
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(true)
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.SourceMapDevToolPlugin({
+      test: /index\.js$/
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      test: /index\.min\.js$/
+    })
   ]
 };

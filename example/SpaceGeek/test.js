@@ -1,7 +1,7 @@
 import test from 'ava';
 import sinon from 'sinon';
-import { Request } from '../../build/alexa-lambda-skill';
-import SpaceGeek from '../../build/example/SpaceGeek';
+import Request from '../../src/request';
+import SpaceGeek from './index';
 
 test.before(() => {
   sinon.stub(Math, 'random', () => 0.7123406182508916);

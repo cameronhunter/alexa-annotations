@@ -1,6 +1,6 @@
 import test from 'ava';
-import { Request } from '../../build/alexa-lambda-skill';
-import HelloWorld from '../../build/example/HelloWorld';
+import Request from '../../src/request';
+import HelloWorld from './index';
 
 test('LaunchRequest', t => {
   const event = Request.launchRequest().build();
