@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "alexa-response": "^2.0.1",
-    "bluebird": "^3.3.1",
+    "bluebird": "^3.3.4",
     "object-values": "^1.0.0"
   },
   "devDependencies": {
