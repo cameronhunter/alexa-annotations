@@ -25,7 +25,7 @@ export default class SpaceGeek {
   fact() {
     const index = Math.floor(Math.random() * SPACE_FACTS.length);
     const speech = `Here's your space fact: ${SPACE_FACTS[index]}`;
-    return Response.say(speech).card('SpaceGeek', speech);
+    return Response.say(speech).card({ title: 'SpaceGeek', content: speech });
   }
 
   @Intent('AMAZON.HelpIntent')
