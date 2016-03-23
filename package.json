@@ -55,5 +55,8 @@
     "skill",
     "amazon",
     "lambda"
-  ]
+  ],
+  "ava": {
+    "babel": "inherit"
+  }
 }
