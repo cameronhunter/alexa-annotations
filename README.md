@@ -23,7 +23,7 @@ export default class Echo {
 
   @Intent('echo')
   echo({ sentence }) {
-    return say(sentence).card('Echo', sentence);
+    return say(sentence).card({ title: 'Echo', content: sentence });
   }
 
   @Intent('AMAZON.HelpIntent')
@@ -40,7 +40,7 @@ export default class Echo {
   credits() {
     const url = 'https://raw.githubusercontent.com/cameronhunter/alexa-lambda-skill/master/package.json';
     return fetch(url).then(response => response.json()).then(({ name, author }) => {
-      return say(`${name} was created by ${author.name}`).card(name, `Credits: ${author.name} <${author.email}> (${author.url})`);
+      return say(`${name} was created by ${author.name}`).card({ title: name, content: `Credits: ${author.name} <${author.email}> (${author.url})`});
     });
   }
 
