@@ -19,7 +19,7 @@ export default class HistoryBuff {
   @Launch
   launch() {
     return ask('<speak><p>History buff.</p> <p>What day do you want events for?</p></speak>', 'SSML')
-            .card('This Day in History', 'History Buff. What day do you want events for?')
+            .card({ title: 'This Day in History', content: 'History Buff. What day do you want events for?' })
             .reprompt(IntroText);
   }
 
@@ -34,7 +34,7 @@ export default class HistoryBuff {
       const speechText = events.reduce((state, event) => `<p>${state}${event}</p>`, '');
 
       return ask(`<speak><p>For ${monthName} ${date.getDate()}, </p> ${speechText} <p>Wanna go deeper in history?</p></speak>`, 'SSML')
-              .card(cardTitle, `For ${monthName} ${date.getDate()}, ${events.join(' ')}`)
+              .card({ title: cardTitle, content: `For ${monthName} ${date.getDate()}, ${events.join(' ')}` })
               .reprompt(IntroText)
               .attributes({ result, index: PaginationSize });
     }).catch(error => {
@@ -48,12 +48,12 @@ export default class HistoryBuff {
     const repromptText = 'Do you want to know more about what happened on this date?';
 
     if (!this.result) {
-      return ask(IntroText).card(cardTitle, IntroText).reprompt(repromptText);
+      return ask(IntroText).card({ title: cardTitle, content: IntroText }).reprompt(repromptText);
     }
 
     if (this.index >= this.result.length) {
       return ask('There are no more events for this date. Try another date by saying <break time="0.3s"/> get events for august thirtieth.', 'SSML')
-              .card(cardTitle, 'There are no more events for this date. Try another date by saying, get events for august thirtieth.')
+              .card({ title: cardTitle, content: 'There are no more events for this date. Try another date by saying, get events for august thirtieth.' })
               .reprompt(repromptText);
     }
 
@@ -64,7 +64,7 @@ export default class HistoryBuff {
     const cardContent = events.join(' ');
 
     return ask('<speak>' + speechText + (moreContent ? ' Wanna go deeper in history?' : '') + '</speak>', 'SSML')
-            .card(cardTitle, cardContent + (moreContent ? ' Wanna go deeper in history?' : ''))
+            .card({ title: cardTitle, content: cardContent + (moreContent ? ' Wanna go deeper in history?' : '') })
             .reprompt(repromptText)
             .attributes({ result, index });
   }

@@ -12,7 +12,7 @@ export default class HelloWorld {
 
   @Intent('HelloWorldIntent')
   hello() {
-    return Response.say('Hello World!').card('Greeter', 'Hello World!');
+    return Response.say('Hello World!').card({ title: 'Greeter', content: 'Hello World!' });
   }
 
   @Intent('AMAZON.HelpIntent')
@@ -24,7 +24,8 @@ export default class HelloWorld {
   credits() {
     const url = 'https://raw.githubusercontent.com/cameronhunter/alexa-lambda-skill/master/package.json';
     return fetch(url).then(response => response.json()).then(({ author }) => {
-      return Response.say(`Hello World was created by ${author.name}`).card('Hello World', `Credits: ${author.name} <${author.email}> (${author.url})`);
+      return Response.say(`Hello World was created by ${author.name}`)
+                     .card({ title: 'Hello World', content: `Credits: ${author.name} <${author.email}> (${author.url})` });
     });
   }
 
