@@ -15,7 +15,7 @@ module.exports = {
     babel({
       babelrc: false,
       presets: ['es2015-rollup', 'stage-1'],
-      plugins: ['transform-decorators-legacy']
+      plugins: ['transform-decorators-legacy', 'transform-class-properties']
     }),
     inject({
       exclude: 'node_modules/**',
