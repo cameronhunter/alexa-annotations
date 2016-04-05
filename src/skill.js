@@ -11,10 +11,9 @@ const SkillAnnotation = (options) => (Skill) => (event, context) => {
   const { application, attributes } = session || {};
 
   return isAuthorized(options, application).then(() => {
-    const skill = new Skill(attributes);
-    return (skill.route && skill.route(request)) || Promise.reject(NotFound);
+    return new Skill(attributes).route(request) || Promise.reject(NotFound);
   }).then(response => {
-    return (response.build && typeof response.build === 'function') ? response.build(attributes) : response;
+    return (typeof response.build === 'function') ? response.build(attributes) : response;
   }).then(response => {
     succeed && succeed(response);
     return response;
