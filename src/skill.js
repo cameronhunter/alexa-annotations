@@ -1,9 +1,9 @@
 import { Unauthorized, NotFound, InternalServer } from './error-codes';
 
-const isAuthorized = (expected = {}, actual = {}) => {
+const isAuthorized = (expected = {}, actual = {}) => new Promise((resolve, reject) => {
   const isOK = !expected.applicationId || expected.applicationId === actual.applicationId;
-  return isOK ? Promise.resolve() : Promise.reject(Unauthorized);
-};
+  return isOK ? resolve() : reject(Unauthorized);
+});
 
 const SkillAnnotation = (options) => (Skill) => (event, context) => {
   const { succeed, fail } = context || {};
