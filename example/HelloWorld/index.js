@@ -2,7 +2,7 @@ import { Skill, Intent, Launch } from '../..';
 import Response from 'alexa-response';
 import fetch from 'isomorphic-fetch';
 
-@Skill
+@Skill({ applicationId: 'my-app-id' })
 export default class HelloWorld {
 
   @Launch

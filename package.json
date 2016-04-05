@@ -27,7 +27,6 @@
     "lint": "eslint src/**/*.js example/**/*.js"
   },
   "dependencies": {
-    "alexa-response": "^3.0.0",
     "bluebird": "^3.3.4",
     "object-values": "^1.0.0"
   },

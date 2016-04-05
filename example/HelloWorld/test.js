@@ -2,8 +2,10 @@ import test from 'ava';
 import Request from '../../src/request';
 import HelloWorld from './index';
 
+const DefaultRequest = Request.session({ application: { applicationId: 'my-app-id' } });
+
 test('LaunchRequest', t => {
-  const event = Request.launchRequest().build();
+  const event = DefaultRequest.launchRequest().build();
 
   return HelloWorld(event).then(response => {
     t.same(response, {
@@ -18,7 +20,7 @@ test('LaunchRequest', t => {
 });
 
 test('HelloWorldIntent', t => {
-  const event = Request.intent('HelloWorldIntent').build();
+  const event = DefaultRequest.intent('HelloWorldIntent').build();
 
   return HelloWorld(event).then(response => {
     t.same(response, {
@@ -33,7 +35,7 @@ test('HelloWorldIntent', t => {
 });
 
 test('AMAZON.HelpIntent', t => {
-  const event = Request.intent('AMAZON.HelpIntent').build();
+  const event = DefaultRequest.intent('AMAZON.HelpIntent').build();
 
   return HelloWorld(event).then(response => {
     t.same(response, {
@@ -48,7 +50,7 @@ test('AMAZON.HelpIntent', t => {
 });
 
 test('Credits', t => {
-  const event = Request.intent('Credits').build();
+  const event = DefaultRequest.intent('Credits').build();
 
   return HelloWorld(event).then(response => {
     t.same(response, {
