@@ -4,8 +4,8 @@
     "email": "hello@cameronhunter.co.uk",
     "url": "http://cameronhunter.co.uk"
   },
-  "name": "alexa-lambda-skill",
-  "description": "Create Alexa Skills for AWS Lambda, easily.",
+  "name": "alexa-annotations",
+  "description": "Create Alexa skills for the Amazon Echo, easily.",
   "version": "4.0.1",
   "main": "build/index.min.js",
   "jsnext:main": "src/index.js",
