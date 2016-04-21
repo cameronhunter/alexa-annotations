@@ -8,10 +8,10 @@ const isAuthorized = (expected = {}, actual = {}) => new Promise((resolve, rejec
 const SkillAnnotation = (options) => (Skill) => (event, context) => {
   const { succeed, fail } = context || {};
   const { request, session } = event || {};
-  const { application, attributes } = session || {};
+  const { application, attributes, user } = session || {};
 
   return isAuthorized(options, application).then(() => {
-    return new Skill(attributes).route(request) || Promise.reject(NotFound);
+    return new Skill(attributes).route(request, user) || Promise.reject(NotFound);
   }).then(response => {
     return (typeof response.build === 'function') ? response.build(attributes) : response;
   }).then(response => {
