@@ -5,8 +5,7 @@ const isAuthorized = (expected = {}, actual = {}) => new Promise((resolve, rejec
   return isOK ? resolve() : reject(Unauthorized);
 });
 
-const SkillAnnotation = (options) => (Skill) => (event, context) => {
-  const { succeed, fail } = context || {};
+const SkillAnnotation = (options) => (Skill) => (event, context, callback) => {
   const { request, session } = event || {};
   const { application, attributes } = session || {};
 
@@ -15,11 +14,18 @@ const SkillAnnotation = (options) => (Skill) => (event, context) => {
   }).then(response => {
     return (typeof response.build === 'function') ? response.build(attributes) : response;
   }).then(response => {
-    succeed && succeed(response);
+    callback && callback(null, response);
     return response;
   }).catch((error = InternalServer) => {
-    fail && fail(error);
+    callback && callback(error);
     return error;
+  }).then(response => {
+    if (options.logging !== false) {
+      const name = (typeof options.logging === 'string') ? options.logging : 'Skill';
+      console.log(`[${name}]`, JSON.stringify({ request, response }));
+    }
+
+    return response;
   });
 };
 
