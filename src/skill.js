@@ -7,10 +7,10 @@ const isAuthorized = (expected = {}, actual = {}) => new Promise((resolve, rejec
 
 const SkillAnnotation = (options) => (Skill) => (event, context, callback) => {
   const { request, session } = event || {};
-  const { application, attributes, user } = session || {};
+  const { application, attributes } = session || {};
 
   return isAuthorized(options, application).then(() => {
-    return new Skill(attributes, user).route(request) || Promise.reject(NotFound);
+    return new Skill(attributes, session).route(request) || Promise.reject(NotFound);
   }).then(response => {
     return (typeof response.build === 'function') ? response.build(attributes) : response;
   }).then(response => {
