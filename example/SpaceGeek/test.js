@@ -15,7 +15,7 @@ test('LaunchRequest', t => {
   const event = Request.launchRequest().build();
 
   return SpaceGeek(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: true,
@@ -30,7 +30,7 @@ test('GetNewFactIntent', t => {
   const event = Request.intent('GetNewFactIntent').build();
 
   return SpaceGeek(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: true,

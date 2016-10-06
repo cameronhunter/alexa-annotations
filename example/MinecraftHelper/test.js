@@ -6,7 +6,7 @@ test('LaunchRequest', t => {
   const event = Request.launchRequest().build();
 
   return MinecraftHelper(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: false,
@@ -21,7 +21,7 @@ test('RecipeIntent', t => {
   const event = Request.intent('RecipeIntent', { Item: 'Farmland' }).build();
 
   return MinecraftHelper(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: true,
@@ -36,7 +36,7 @@ test('Unknown recipe', t => {
   const event = Request.intent('RecipeIntent', { Item: 'Coffee' }).build();
 
   return MinecraftHelper(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: false,
@@ -51,7 +51,7 @@ test('No recipe', t => {
   const event = Request.intent('RecipeIntent').build();
 
   return MinecraftHelper(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: false,

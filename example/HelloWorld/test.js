@@ -8,7 +8,7 @@ test('LaunchRequest', t => {
   const event = DefaultRequest.launchRequest().build();
 
   return HelloWorld(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: false,
@@ -23,7 +23,7 @@ test('HelloWorldIntent', t => {
   const event = DefaultRequest.intent('HelloWorldIntent').build();
 
   return HelloWorld(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: true,
@@ -38,7 +38,7 @@ test('AMAZON.HelpIntent', t => {
   const event = DefaultRequest.intent('AMAZON.HelpIntent').build();
 
   return HelloWorld(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: false,
@@ -53,7 +53,7 @@ test('Credits', t => {
   const event = DefaultRequest.intent('Credits').build();
 
   return HelloWorld(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: true,

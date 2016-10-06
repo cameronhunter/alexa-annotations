@@ -6,7 +6,7 @@ test('launch', t => {
   const event = Request.launchRequest().build();
 
   return HistoryBuff(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: false,
@@ -22,7 +22,7 @@ test.skip('GetFirstEventIntent', t => {
   const event = Request.intent('GetFirstEventIntent', { day: 465302909000 });
 
   return HistoryBuff(event).then(response => {
-    t.same(response, {
+    t.deepEqual(response, {
       version: '1.0',
       response: {
         shouldEndSession: false,
