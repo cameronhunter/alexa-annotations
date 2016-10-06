@@ -17,12 +17,12 @@ import fetch from 'isomorphic-fetch';
 export default class Echo {
 
   @Launch
-  launch() {
+  launch(request) {
     return ask('Welcome to the example Echo skill! What would you like me to repeat?');
   }
 
   @Intent('echo')
-  echo({ sentence }) {
+  echo({ sentence }, request) {
     return say(sentence).card({ title: 'Echo', content: sentence });
   }
 

@@ -1,8 +1,9 @@
-const annotation = (predicate, transform = i => i) => (skill, name) => {
+const annotation = (predicate, transform) => (skill, name) => {
   const route = skill.route || (() => false);
 
   skill.route = function(request) {
-    return route.call(this, request) || (predicate(request) && skill[name].call(this, transform(request), request));
+    const args = transform ? [transform(request), request] : [request];
+    return route.call(this, request) || (predicate(request) && skill[name].apply(this, args));
   };
 
   return skill;
