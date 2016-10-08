@@ -16,20 +16,23 @@ export default class SmartHome {
 
   @TurnOff
   off(applianceId) {
-      return brightness(applianceId, 0);
+    return brightness(applianceId, 0);
   }
 
-  @Control('SetPercentageRequest', 'IncrementPercentageRequest', 'DecrementPercentageRequest')
-  percentage(applianceId, control, payload = {}) {
-    switch (control) {
-      case 'SetPercentageRequest':
-        return brightness(applianceId, payload.percentageState.value);
+  @SetPercentage
+  percentage(applianceId, percentage) {
+    return brightness(applianceId, percentage);
+  }
 
+  @Control('IncrementPercentageRequest', 'DecrementPercentageRequest')
+  control(applianceId, name, payload = {}) {
+    const { deltaPercentage = {} } = payload;
+    switch (name) {
       case 'IncrementPercentageRequest':
-        return brightness(applianceId).then(value => brightness(applianceId, value + payload.deltaPercentage.value));
+        return brightness(applianceId).then(value => brightness(applianceId, value + deltaPercentage.value));
 
       case 'DecrementPercentageRequest':
-        return brightness(applianceId).then(value => brightness(applianceId, value - payload.deltaPercentage.value));
+        return brightness(applianceId).then(value => brightness(applianceId, value - deltaPercentage.value));
 
       default:
         return Promise.reject();
