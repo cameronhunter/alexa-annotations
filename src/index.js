@@ -1,4 +1,9 @@
-export * as ErrorCode from './error-codes';
-export Request from './request';
-export Skill from './skill';
-export { Launch, Intent, SessionEnded } from './annotations';
+export Skill from './CustomSkill';
+export CustomSkill from './CustomSkill';
+
+export Launch from './Launch';
+export Intent from './Intent';
+export SessionEnded from './SessionEnded';
+
+export Request from './Request';
+export * as ErrorCode from './ErrorCodes';
