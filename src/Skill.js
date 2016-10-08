@@ -17,8 +17,7 @@ const Skill = (options) => (Skill) => (event, context, callback) => {
     return error;
   }).then(response => {
     if (options.logging !== false) {
-      const name = (typeof options.logging === 'string') ? options.logging : 'Skill';
-      console.log(`[${name}]`, JSON.stringify({ event, response }));
+      console.log(`[${Skill.name}]`, JSON.stringify({ event, response }));
     }
 
     return response;
