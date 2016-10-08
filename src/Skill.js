@@ -1,6 +1,5 @@
 import { NotFound, InternalServer } from './ErrorCodes';
 import isAuthorized from './Authorization';
-import annotation from './annotation/class';
 
 const Skill = (options) => (Skill) => (event, context, callback) => {
   const { session } = event || {};
@@ -26,4 +25,18 @@ const Skill = (options) => (Skill) => (event, context, callback) => {
   });
 };
 
-export default annotation(Skill);
+/*******************************************************************************
+ * This provides multiple ways of declaring an annotation, for example:
+ *
+ * 1. @Skill
+ * 2. @Skill()
+ * 3. @Skill({ applicationId: 'my-authorized-application-id' })
+ ******************************************************************************/
+
+export default (optionsOrClass = {}) => {
+  const isClass = typeof optionsOrClass === 'function';
+  const options = isClass ? {} : optionsOrClass;
+  const handler = Skill(options);
+
+  return isClass ? handler(optionsOrClass) : handler;
+};

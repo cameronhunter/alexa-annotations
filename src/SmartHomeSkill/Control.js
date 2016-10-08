@@ -1,4 +1,4 @@
-import annotation from '../annotation/method';
+import annotation from '../annotation';
 
 const isControlRequest = (...names) => (event = {}) => {
     const { header = {} } = event;
