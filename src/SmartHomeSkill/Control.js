@@ -6,12 +6,15 @@ const isControlRequest = (...names) => (event = {}) => {
     return namespace === 'Alexa.ConnectedHome.Control' && (!names.length || names.indexOf(name) >= 0);
 };
 
-export const ControlRequest = (name) => annotation(
+export const ControlRequest = (name, transform) => annotation(
     isControlRequest(name),
-    ({ payload = {} }) => [payload]
+    (transform || (({ payload = {} }) => [payload]))
 );
 
 export default (...names) => annotation(
     isControlRequest(...names),
-    ({ header = {}, payload = {} }) => [header.name, payload]
+    ({ header = {}, payload = {} }) => {
+        const { appliance = {} } = payload;
+        return [appliance.applianceId, header.name, payload];
+    }
 );
