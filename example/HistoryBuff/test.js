@@ -1,5 +1,5 @@
 import test from 'ava';
-import Request from '../../src/request';
+import Request from '../../src/Request';
 import HistoryBuff from './index';
 
 test('launch', t => {
