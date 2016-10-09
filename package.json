@@ -44,7 +44,7 @@
     "eslint": "^3.7.1",
     "isomorphic-fetch": "^2.2.1",
     "npm-run-all": "^3.1.0",
-    "rollup": "^0.36.1",
+    "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-inject": "^2.0.0",
     "rollup-plugin-uglify": "^1.0.1",
